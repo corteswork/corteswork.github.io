@@ -1,0 +1,95 @@
+---
+import Header from '../components/Header.astro';
+import '../styles/tailwind.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Plataforma de subastas holandesas' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-50">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <footer class="bg-gray-900 text-white mt-12 py-12 border-t border-gray-800">
+      <div class="max-w-7xl mx-auto px-4">
+        
+      </div>
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+
+        </div>
+          <div>
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+              <span class="text-2xl">🛍️</span>
+              SecondHand
+            </h3>
+            <p class="text-gray-400 text-sm">
+              La plataforma de subastas holandesas donde los precios bajan cada segundo.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-bold mb-4 text-green-400">Comprar</h4>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li><a href="#" class="hover:text-green-400 transition">Explorar Subastas</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Mis Ofertas</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Favoritos</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Historial</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-bold mb-4 text-green-400">Vender</h4>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li><a href="#" class="hover:text-green-400 transition">Crear Subasta</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Mis Productos</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Ventas</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Configuración</a></li>
+            </ul>
+          </div>
+
+          <!-- Soporte -->
+          <div>
+            <h4 class="text-sm font-bold mb-4 text-green-400">Soporte</h4>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li><a href="#" class="hover:text-green-400 transition">Centro de Ayuda</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Contacto</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Privacidad</a></li>
+              <li><a href="#" class="hover:text-green-400 transition">Términos</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-800 pt-8 mt-8">
+          <!-- Social Links -->
+          <div class="flex justify-center gap-6 mb-6">
+            <a href="#" class="text-gray-400 hover:text-green-400 transition text-2xl">f</a>
+            <a href="#" class="text-gray-400 hover:text-green-400 transition text-2xl">𝕏</a>
+            <a href="#" class="text-gray-400 hover:text-green-400 transition text-2xl">in</a>
+            <a href="#" class="text-gray-400 hover:text-green-400 transition text-2xl">▶</a>
+          </div>
+
+          <!-- Copyright -->
+          <div class="text-center text-gray-500 text-sm">
+            <p>&copy; 2026 SecondHand. Todos los derechos reservados.</p>
+            <p class="mt-2">Plataforma de subastas holandesas con ofertas dinámicas</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
