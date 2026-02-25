@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const exampleProducts = [
+  {
+    title: 'iPhone 13 Pro',
+    category: 'Electrónica',
+    description: 'Estado excelente, 128GB, incluye caja original y accesorios.',
+    image:
+      'https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=800',
+    startPrice: 899,
+    minPrice: 599,
+    currentPrice: 735,
+    durationMinutes: 30,
+  },
+  {
+    title: 'Zapatillas Nike Air',
+    category: 'Moda',
+    description: 'Talla 42, usadas muy poco, edición limitada.',
+    image:
+      'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800',
+    startPrice: 180,
+    minPrice: 95,
+    currentPrice: 132,
+    durationMinutes: 45,
+  },
+  {
+    title: 'Monitor 27" 144Hz',
+    category: 'Gaming',
+    description: 'Panel IPS 144Hz, perfecto para juegos competitivos.',
+    image:
+      'https://images.pexels.com/photos/5720568/pexels-photo-5720568.jpeg?auto=compress&cs=tinysrgb&w=800',
+    startPrice: 320,
+    minPrice: 210,
+    currentPrice: 256,
+    durationMinutes: 40,
+  },
+];
+---
+
+<Layout title="Products - SecondHand">
+  <!-- Listado principal de productos (vista pública tipo marketplace) -->
+  <section class="py-20 bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Productos destacados</h1>
+      <p class="text-gray-300 mb-10 max-w-2xl">
+        Explora algunos productos actualmente en subasta y descubre cómo funcionan los precios descendentes
+        en el modelo de subasta holandesa.
+      </p>
+
+      <div class="space-y-6">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-2xl font-semibold">Subastas activas</h2>
+          <a
+            href="#my-account"
+            class="text-sm font-medium"
+            style="color: var(--accent-color);"
+          >
+            Ir a mi cuenta
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          {exampleProducts.map((p) => {
+            const progress =
+              p.startPrice === p.minPrice
+                ? 100
+                : ((p.startPrice - p.currentPrice) / (p.startPrice - p.minPrice)) * 100;
+
+            return (
+              <article class="bg-gray-800 rounded-2xl p-5 border border-gray-700 hover:border-[var(--accent-color)] transition flex flex-col">
+                <div class="mb-3 h-40 rounded-xl overflow-hidden bg-gray-700">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="flex items-start justify-between mb-2">
+                  <h3 class="text-lg font-semibold">{p.title}</h3>
+                  <span
+                    class="text-xs px-3 py-1 rounded-full ml-2"
+                    style="background-color: rgba(45, 224, 159, 0.12); color: var(--accent-color);"
+                  >
+                    {p.category}
+                  </span>
+                </div>
+
+                <p class="text-gray-400 text-sm mb-3 flex-1">{p.description}</p>
+
+                <dl class="space-y-1 text-sm mb-3">
+                  <div class="flex justify-between">
+                    <dt class="text-gray-400">Precio inicial</dt>
+                    <dd class="font-semibold">{p.startPrice} €</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt class="text-gray-400">Precio mínimo</dt>
+                    <dd class="font-semibold">{p.minPrice} €</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt class="text-gray-400">Duración</dt>
+                    <dd class="font-semibold">{p.durationMinutes} min</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt class="text-gray-400">Precio actual</dt>
+                    <dd class="font-semibold" style="color: var(--accent-color);">
+                      {p.currentPrice} €
+                    </dd>
+                  </div>
+                </dl>
+
+                <div class="mb-4">
+                  <div class="flex justify-between text-[10px] text-gray-400 mb-1">
+                    <span>Inicio</span>
+                    <span>Actual</span>
+                    <span>Mínimo</span>
+                  </div>
+                  <div class="relative h-1.5 rounded-full bg-gray-700 overflow-hidden">
+                    <div
+                      class="absolute inset-y-0 left-0 rounded-r-full"
+                      style={`width: ${progress}%; background-color: var(--accent-color);`}
+                    ></div>
+                    <div
+                      class="absolute -top-1 w-3 h-3 rounded-full border border-gray-900"
+                      style={`left: calc(${progress}% - 6px); background-color: #f9fafb;`}
+                    ></div>
+                  </div>
+                </div>
+
+                <button class="mt-auto w-full btn-accent py-2.5 rounded-lg text-sm font-semibold">
+                  Ver detalle de la subasta
+                </button>
+              </article>
+            );
+          })}
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zona "Mi cuenta" con formulario separado, estilo Vinted -->
+  <section id="my-account" class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid lg:grid-cols-[1.1fr,0.9fr] gap-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-1">Mis productos en subasta</h2>
+          <p class="text-gray-500 text-sm mb-5">
+            Aquí aparecerán los productos que hayas puesto en subasta desde tu cuenta.
+          </p>
+
+          <div class="border-t border-gray-100 pt-4">
+            <div class="flex items-center gap-3 mb-3">
+              <div
+                class="w-9 h-9 rounded-full flex items-center justify-center"
+                style="background-color: rgba(45, 224, 159, 0.12);"
+              >
+                <lord-icon
+                  src="https://cdn.lordicon.com/ggirntso.json"
+                  trigger="loop"
+                  delay="1500"
+                  colors="primary:#2de09f"
+                  style="width:22px;height:22px"
+                ></lord-icon>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Tus productos</p>
+                <p class="text-xs text-gray-500">Solo visibles para ti y vinculados a tu perfil.</p>
+              </div>
+            </div>
+
+            <div id="user-products-empty" class="text-xs text-gray-500 border border-dashed border-gray-200 rounded-xl px-4 py-3 flex items-center justify-between gap-4">
+              <span>
+                Aún no has publicado ningún producto. Empieza creando tu primer anuncio.
+              </span>
+              <a
+                href="/UploadProduct"
+                class="btn-accent px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap"
+              >
+                Crear producto
+              </a>
+            </div>
+            <div id="user-products" class="space-y-3 mt-3 text-sm"></div>
+          </div>
+        </div>
+
+        <aside class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 flex flex-col justify-between">
+          <div>
+            <h2 class="text-xl font-semibold mb-1 text-gray-900">Publicar un nuevo producto</h2>
+            <p class="text-gray-500 text-sm mb-5">
+              Crea un anuncio con fotos, descripción y los precios de tu subasta holandesa.
+            </p>
+          </div>
+          <a
+            href="/UploadProduct"
+            class="inline-flex items-center justify-center btn-accent px-4 py-2.5 rounded-lg text-sm font-semibold mt-4"
+          >
+            Ir a crear producto
+          </a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+

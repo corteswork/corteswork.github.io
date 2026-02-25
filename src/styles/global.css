@@ -1,3 +1,7 @@
+*:root {
+  --accent-color: #2de09f;
+}
+
 *,
 *::before,
 *::after {
@@ -63,4 +67,25 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  transition: background-color 150ms ease, filter 150ms ease, transform 150ms ease;
+}
+
+.btn-accent:hover {
+  filter: brightness(1.05);
+}
+
+.btn-accent-outline {
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  background-color: transparent;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.btn-accent-outline:hover {
+  background-color: rgba(45, 224, 159, 0.08);
 }

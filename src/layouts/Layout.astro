@@ -18,22 +18,26 @@ const { title, description = 'Plataforma de subastas holandesas' } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
   </head>
-  <body class="bg-gray-50">
+  <body class="bg-gray-50 min-h-screen flex flex-col">
     <Header />
-    <main>
+    <main class="flex-1">
       <slot />
     </main>
     <footer class="bg-gray-900 text-white mt-12 py-12 border-t border-gray-800">
       <div class="max-w-7xl mx-auto px-4">
-        
-      </div>
         <div class="grid md:grid-cols-4 gap-8 mb-8">
-
-        </div>
           <div>
             <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
-              <span class="text-2xl">🛍️</span>
+              <span class="inline-flex items-center justify-center">
+                <lord-icon
+                  src="https://cdn.lordicon.com/ggirntso.json"
+                  trigger="hover"
+                  colors="primary:#2de09f,secondary:#2de09f"
+                  style="width:32px;height:32px"
+                ></lord-icon>
+              </span>
               SecondHand
             </h3>
             <p class="text-gray-400 text-sm">
@@ -42,7 +46,7 @@ const { title, description = 'Plataforma de subastas holandesas' } = Astro.props
           </div>
 
           <div>
-            <h4 class="text-sm font-bold mb-4 text-green-400">Comprar</h4>
+            <h4 class="text-sm font-bold mb-4" style="color: var(--accent-color);">Comprar</h4>
             <ul class="space-y-2 text-gray-400 text-sm">
               <li><a href="#" class="hover:text-green-400 transition">Explorar Subastas</a></li>
               <li><a href="#" class="hover:text-green-400 transition">Mis Ofertas</a></li>
@@ -52,7 +56,7 @@ const { title, description = 'Plataforma de subastas holandesas' } = Astro.props
           </div>
 
           <div>
-            <h4 class="text-sm font-bold mb-4 text-green-400">Vender</h4>
+            <h4 class="text-sm font-bold mb-4" style="color: var(--accent-color);">Vender</h4>
             <ul class="space-y-2 text-gray-400 text-sm">
               <li><a href="#" class="hover:text-green-400 transition">Crear Subasta</a></li>
               <li><a href="#" class="hover:text-green-400 transition">Mis Productos</a></li>
@@ -63,11 +67,11 @@ const { title, description = 'Plataforma de subastas holandesas' } = Astro.props
 
           <!-- Soporte -->
           <div>
-            <h4 class="text-sm font-bold mb-4 text-green-400">Soporte</h4>
+            <h4 class="text-sm font-bold mb-4" style="color: var(--accent-color);">Soporte</h4>
             <ul class="space-y-2 text-gray-400 text-sm">
               <li><a href="#" class="hover:text-green-400 transition">Centro de Ayuda</a></li>
               <li><a href="#" class="hover:text-green-400 transition">Contacto</a></li>
-              <li><a href="#" class="hover:text-green-400 transition">Privacidad</a></li>
+              <li><a href="/politica-privacidad" class="hover:text-green-400 transition">Privacidad</a></li>
               <li><a href="#" class="hover:text-green-400 transition">Términos</a></li>
             </ul>
           </div>
@@ -77,10 +81,65 @@ const { title, description = 'Plataforma de subastas holandesas' } = Astro.props
         <div class="border-t border-gray-800 pt-8 mt-8">
           <!-- Social Links -->
           <div class="flex justify-center gap-6 mb-6">
-            <a href="#" class="text-gray-400 hover:text-green-400 transition text-2xl">f</a>
-            <a href="#" class="text-gray-400 hover:text-green-400 transition text-2xl">𝕏</a>
-            <a href="#" class="text-gray-400 hover:text-green-400 transition text-2xl">in</a>
-            <a href="#" class="text-gray-400 hover:text-green-400 transition text-2xl">▶</a>
+            <a href="#" class="text-gray-400 hover:text-green-400 transition" aria-label="Facebook">
+              <lord-icon
+                src="https://cdn.lordicon.com/kthelypq.json"
+                trigger="hover"
+                colors="primary:#9ca3af,secondary:#2de09f"
+                style="width:30px;height:30px"
+              ></lord-icon>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-green-400 transition" aria-label="X">
+              <lord-icon
+                src="https://cdn.lordicon.com/ulnswmkk.json"
+                trigger="hover"
+                colors="primary:#9ca3af,secondary:#2de09f"
+                style="width:30px;height:30px"
+              ></lord-icon>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-green-400 transition" aria-label="LinkedIn">
+              <lord-icon
+                src="https://cdn.lordicon.com/oqdmuxru.json"
+                trigger="hover"
+                colors="primary:#9ca3af,secondary:#2de09f"
+                style="width:30px;height:30px"
+              ></lord-icon>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-green-400 transition" aria-label="YouTube">
+              <lord-icon
+                src="https://cdn.lordicon.com/abfverha.json"
+                trigger="hover"
+                colors="primary:#9ca3af,secondary:#2de09f"
+                style="width:30px;height:30px"
+              ></lord-icon>
+            </a>
+          </div>
+
+          <!-- Cookie banner -->
+          <div
+            id="cookie-banner"
+            class="fixed inset-x-0 bottom-0 z-50 hidden"
+          >
+            <div class="max-w-7xl mx-auto px-4 pb-4">
+              <div class="bg-gray-900 text-white rounded-2xl p-4 shadow-lg border border-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="text-sm text-gray-200">
+                  <p class="font-semibold mb-1">Usamos cookies</p>
+                  <p class="text-gray-400">
+                    Utilizamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.
+                    Puedes obtener más información en nuestra
+                    <a href="/politica-privacidad" class="underline" style="color: var(--accent-color);">Política de Privacidad</a>.
+                  </p>
+                </div>
+                <div class="flex gap-3 justify-end">
+                  <button
+                    data-cookie-accept
+                    class="btn-accent px-4 py-2 rounded-lg text-sm font-semibold"
+                  >
+                    Aceptar
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Copyright -->
@@ -91,5 +150,24 @@ const { title, description = 'Plataforma de subastas holandesas' } = Astro.props
         </div>
       </div>
     </footer>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () =&gt; {
+        const banner = document.getElementById('cookie-banner');
+        if (!banner) return;
+
+        const accepted = window.localStorage.getItem('cookie_consent');
+        if (!accepted) {
+          banner.classList.remove('hidden');
+        }
+
+        const acceptBtn = banner.querySelector('[data-cookie-accept]');
+        if (acceptBtn) {
+          acceptBtn.addEventListener('click', () =&gt; {
+            window.localStorage.setItem('cookie_consent', 'true');
+            banner.classList.add('hidden');
+          });
+        }
+      });
+    </script>
   </body>
 </html>
