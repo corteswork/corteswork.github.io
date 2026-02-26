@@ -1,11 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Mi cuenta - SecondHand">
   <section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div
+        class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+      >
         <div class="flex items-center gap-4">
           <div
             class="w-14 h-14 rounded-full flex items-center justify-center text-white text-xl font-semibold"
@@ -14,8 +16,12 @@ import Layout from '../layouts/Layout.astro';
             JP
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Mi cuenta</h1>
-            <p class="text-sm text-gray-500">Gestiona tus productos, subastas y datos personales.</p>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900">
+              Mi cuenta
+            </h1>
+            <p class="text-sm text-gray-500">
+              Gestiona tus productos, subastas y datos personales.
+            </p>
           </div>
         </div>
         <div class="flex gap-3">
@@ -27,8 +33,7 @@ import Layout from '../layouts/Layout.astro';
               src="https://cdn.lordicon.com/zrkkrrpl.json"
               trigger="hover"
               colors="primary:#ffffff,secondary:#111827"
-              style="width:20px;height:20px"
-            ></lord-icon>
+              style="width:20px;height:20px"></lord-icon>
             <span>Subir producto</span>
           </a>
           <a
@@ -41,15 +46,22 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <div class="grid lg:grid-cols-[1.2fr,0.8fr] gap-10">
-        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-          <h2 class="text-xl font-semibold text-gray-900 mb-1">Mis productos en subasta</h2>
+        <section
+          class="bg-white rounded-product shadow-sm border border-gray-200 p-6"
+        >
+          <h2 class="text-xl font-semibold text-gray-900 mb-1">
+            Mis productos en subasta
+          </h2>
           <p class="text-gray-500 text-sm mb-5">
-            Consulta el estado de tus anuncios activos y revisa el rendimiento de tus subastas holandesas.
+            Consulta el estado de tus anuncios activos y revisa el rendimiento
+            de tus subastas holandesas.
           </p>
 
           <div class="border-t border-gray-100 pt-4 space-y-4">
             <article class="flex gap-4">
-              <div class="w-24 h-24 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+              <div
+                class="w-24 h-24 rounded-product overflow-hidden bg-gray-100 flex-shrink-0"
+              >
                 <img
                   src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
                   alt="iPhone 13 Pro"
@@ -60,8 +72,12 @@ import Layout from '../layouts/Layout.astro';
               <div class="flex-1">
                 <div class="flex items-start justify-between gap-3 mb-1">
                   <div>
-                    <h3 class="text-sm font-semibold text-gray-900">iPhone 13 Pro 128GB</h3>
-                    <p class="text-xs text-gray-500">Electrónica · Hace 3 horas</p>
+                    <h3 class="text-sm font-semibold text-gray-900">
+                      iPhone 13 Pro 128GB
+                    </h3>
+                    <p class="text-xs text-gray-500">
+                      Electrónica · Hace 3 horas
+                    </p>
                   </div>
                   <span
                     class="text-[11px] px-2 py-0.5 rounded-full"
@@ -71,14 +87,27 @@ import Layout from '../layouts/Layout.astro';
                   </span>
                 </div>
                 <div class="flex justify-between text-xs text-gray-600 mb-1.5">
-                  <span>Inicial: <span class="font-semibold text-gray-800">899 €</span></span>
-                  <span>Mínimo: <span class="font-semibold text-gray-800">599 €</span></span>
+                  <span
+                    >Inicial: <span class="font-semibold text-gray-800"
+                      >899 €</span
+                    ></span
+                  >
+                  <span
+                    >Mínimo: <span class="font-semibold text-gray-800"
+                      >599 €</span
+                    ></span
+                  >
                   <span>
                     Actual:
-                    <span class="font-semibold" style="color: var(--accent-color);">735 €</span>
+                    <span
+                      class="font-semibold"
+                      style="color: var(--accent-color);">735 €</span
+                    >
                   </span>
                 </div>
-                <div class="flex justify-between items-center text-[11px] text-gray-500">
+                <div
+                  class="flex justify-between items-center text-[11px] text-gray-500"
+                >
                   <span>Duración: 30 min</span>
                   <span>Quedan: 12 min</span>
                   <span>Ofertas: 4</span>
@@ -87,7 +116,9 @@ import Layout from '../layouts/Layout.astro';
             </article>
 
             <article class="flex gap-4">
-              <div class="w-24 h-24 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+              <div
+                class="w-24 h-24 rounded-product overflow-hidden bg-gray-100 flex-shrink-0"
+              >
                 <img
                   src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400"
                   alt="Zapatillas Nike Air"
@@ -98,19 +129,37 @@ import Layout from '../layouts/Layout.astro';
               <div class="flex-1">
                 <div class="flex items-start justify-between gap-3 mb-1">
                   <div>
-                    <h3 class="text-sm font-semibold text-gray-900">Zapatillas Nike Air</h3>
+                    <h3 class="text-sm font-semibold text-gray-900">
+                      Zapatillas Nike Air
+                    </h3>
                     <p class="text-xs text-gray-500">Moda · Ayer</p>
                   </div>
-                  <span class="text-[11px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+                  <span
+                    class="text-[11px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-600"
+                  >
                     Finalizada
                   </span>
                 </div>
                 <div class="flex justify-between text-xs text-gray-600 mb-1.5">
-                  <span>Inicial: <span class="font-semibold text-gray-800">180 €</span></span>
-                  <span>Vendida por: <span class="font-semibold text-gray-800">129 €</span></span>
-                  <span>Ganador: <span class="font-semibold text-gray-800">user_482</span></span>
+                  <span
+                    >Inicial: <span class="font-semibold text-gray-800"
+                      >180 €</span
+                    ></span
+                  >
+                  <span
+                    >Vendida por: <span class="font-semibold text-gray-800"
+                      >129 €</span
+                    ></span
+                  >
+                  <span
+                    >Ganador: <span class="font-semibold text-gray-800"
+                      >user_482</span
+                    ></span
+                  >
                 </div>
-                <div class="flex justify-between items-center text-[11px] text-gray-500">
+                <div
+                  class="flex justify-between items-center text-[11px] text-gray-500"
+                >
                   <span>Duración: 45 min</span>
                   <span>Ofertas totales: 9</span>
                   <span>Estado: Pagado</span>
@@ -121,8 +170,12 @@ import Layout from '../layouts/Layout.astro';
         </section>
 
         <aside class="space-y-6">
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-3">Resumen de cuenta</h2>
+          <div
+            class="bg-white rounded-product shadow-sm border border-gray-200 p-6"
+          >
+            <h2 class="text-lg font-semibold text-gray-900 mb-3">
+              Resumen de cuenta
+            </h2>
             <dl class="space-y-2 text-sm text-gray-700">
               <div class="flex justify-between">
                 <dt>Productos activos</dt>
@@ -139,18 +192,22 @@ import Layout from '../layouts/Layout.astro';
             </dl>
           </div>
 
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-3">Acciones rápidas</h2>
+          <div
+            class="bg-white rounded-product shadow-sm border border-gray-200 p-6"
+          >
+            <h2 class="text-lg font-semibold text-gray-900 mb-3">
+              Acciones rápidas
+            </h2>
             <div class="space-y-2 text-sm">
               <a
                 href="/UploadProduct"
-                class="block w-full btn-accent px-3 py-2 rounded-lg text-center font-semibold"
+                class="block w-full btn-accent px-3 py-2 rounded-product text-center font-semibold"
               >
                 Crear nuevo producto
               </a>
               <a
                 href="/Products"
-                class="block w-full btn-accent-outline px-3 py-2 rounded-lg text-center font-semibold"
+                class="block w-full btn-accent-outline px-3 py-2 rounded-product text-center font-semibold"
               >
                 Ver subastas activas
               </a>
@@ -161,4 +218,3 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 </Layout>
-

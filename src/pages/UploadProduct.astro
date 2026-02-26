@@ -1,33 +1,44 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Subir producto - SecondHand">
   <section class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-4">
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Subir nuevo producto</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+        Subir nuevo producto
+      </h1>
       <p class="text-gray-600 mb-8">
-        Sube las fotos de tu artículo y completa la información básica para crear un anuncio en tu cuenta.
+        Sube las fotos de tu artículo y completa la información básica para
+        crear un anuncio en tu cuenta.
       </p>
 
-      <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 space-y-6">
+      <div
+        class="bg-gray-50 border border-gray-200 rounded-product p-6 space-y-6"
+      >
         <div>
-          <h2 class="text-lg font-semibold text-gray-900 mb-2">Fotos del producto</h2>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">
+            Fotos del producto
+          </h2>
           <p class="text-sm text-gray-500 mb-3">
-            Añade una o varias imágenes. Verás una vista previa antes de publicar.
+            Añade una o varias imágenes. Verás una vista previa antes de
+            publicar.
           </p>
           <label
-            class="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-xl px-4 py-8 cursor-pointer hover:border-[var(--accent-color)] hover:bg-white transition"
+            class="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-product px-4 py-8 cursor-pointer hover:border-[var(--accent-color)] hover:bg-white transition"
           >
             <lord-icon
               src="https://cdn.lordicon.com/zrkkrrpl.json"
               trigger="hover"
               colors="primary:#2de09f,secondary:#111827"
-              style="width:40px;height:40px"
-            ></lord-icon>
+              style="width:40px;height:40px"></lord-icon>
             <div class="text-center">
-              <p class="text-sm font-medium text-gray-900">Haz clic para subir o arrastra tus imágenes</p>
-              <p class="text-xs text-gray-500">Formatos aceptados: JPG, PNG. Máx. 10 MB por archivo.</p>
+              <p class="text-sm font-medium text-gray-900">
+                Haz clic para subir o arrastra tus imágenes
+              </p>
+              <p class="text-xs text-gray-500">
+                Formatos aceptados: JPG, PNG. Máx. 10 MB por archivo.
+              </p>
             </div>
             <input
               id="upload-files"
@@ -41,80 +52,98 @@ import Layout from '../layouts/Layout.astro';
           <div
             id="upload-preview"
             class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3"
-          ></div>
+          >
+          </div>
         </div>
 
         <div class="border-t border-gray-200 pt-4 space-y-4">
           <div class="grid md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium mb-1" for="upload-title">Título del anuncio</label>
+              <label class="block text-sm font-medium mb-1" for="upload-title"
+                >Título del anuncio</label
+              >
               <input
                 id="upload-title"
                 type="text"
-                class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
+                class="w-full px-3 py-2 rounded-product bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
                 placeholder="Ej. iPhone 13 Pro 128GB como nuevo"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium mb-1" for="upload-category">Categoría</label>
+              <label
+                class="block text-sm font-medium mb-1"
+                for="upload-category">Categoría</label
+              >
               <input
                 id="upload-category"
                 type="text"
-                class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
+                class="w-full px-3 py-2 rounded-product bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
                 placeholder="Ej. Electrónica"
               />
             </div>
           </div>
 
           <div>
-            <label class="block text-sm font-medium mb-1" for="upload-description">Descripción</label>
+            <label
+              class="block text-sm font-medium mb-1"
+              for="upload-description">Descripción</label
+            >
             <textarea
               id="upload-description"
               rows="4"
-              class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
+              class="w-full px-3 py-2 rounded-product bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
               placeholder="Cuenta el estado real del producto, uso, posibles defectos y qué incluye (caja, accesorios, etc.)"
             ></textarea>
           </div>
 
           <div class="grid md:grid-cols-3 gap-4">
             <div>
-              <label class="block text-sm font-medium mb-1" for="upload-start">Precio inicial (€)</label>
+              <label class="block text-sm font-medium mb-1" for="upload-start"
+                >Precio inicial (€)</label
+              >
               <input
                 id="upload-start"
                 type="number"
                 min="1"
                 step="1"
-                class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
+                class="w-full px-3 py-2 rounded-product bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
                 placeholder="Ej. 300"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium mb-1" for="upload-min">Precio mínimo (€)</label>
+              <label class="block text-sm font-medium mb-1" for="upload-min"
+                >Precio mínimo (€)</label
+              >
               <input
                 id="upload-min"
                 type="number"
                 min="1"
                 step="1"
-                class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
+                class="w-full px-3 py-2 rounded-product bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
                 placeholder="Ej. 180"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium mb-1" for="upload-duration">Duración (min)</label>
+              <label
+                class="block text-sm font-medium mb-1"
+                for="upload-duration">Duración (min)</label
+              >
               <input
                 id="upload-duration"
                 type="number"
                 min="5"
                 step="5"
-                class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
+                class="w-full px-3 py-2 rounded-product bg-white border border-gray-300 text-sm text-gray-900 focus:outline-none focus:border-[var(--accent-color)]"
                 placeholder="Ej. 30"
               />
             </div>
           </div>
 
           <div class="flex justify-end pt-2">
-            <button class="btn-accent px-6 py-2.5 rounded-lg text-sm font-semibold">
-              Simular anuncio
+            <button
+              class="btn-accent px-6 py-2.5 rounded-product text-sm font-semibold"
+            >
+              Publicar anuncio
             </button>
           </div>
         </div>
@@ -123,28 +152,29 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <script is:inline>
-    document.addEventListener('DOMContentLoaded', () =&gt; {
-      const input = document.getElementById('upload-files');
-      const preview = document.getElementById('upload-preview');
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("upload-files");
+      const preview = document.getElementById("upload-preview");
 
       if (!input || !preview) return;
 
-      input.addEventListener('change', () =&gt; {
-        preview.innerHTML = '';
+      input.addEventListener("change", () => {
+        preview.innerHTML = "";
         const files = /** @type {FileList} */ (input.files);
         if (!files || !files.length) return;
 
-        Array.from(files).forEach((file) =&gt; {
-          if (!file.type.startsWith('image/')) return;
+        Array.from(files).forEach((file) => {
+          if (!file.type.startsWith("image/")) return;
 
           const url = URL.createObjectURL(file);
-          const wrapper = document.createElement('div');
-          wrapper.className = 'relative rounded-xl overflow-hidden bg-gray-200 h-28';
+          const wrapper = document.createElement("div");
+          wrapper.className =
+            "relative rounded-product overflow-hidden bg-gray-200 h-28";
 
-          const img = document.createElement('img');
+          const img = document.createElement("img");
           img.src = url;
           img.alt = file.name;
-          img.className = 'w-full h-full object-cover';
+          img.className = "w-full h-full object-cover";
 
           wrapper.appendChild(img);
           preview.appendChild(wrapper);
@@ -153,4 +183,3 @@ import Layout from '../layouts/Layout.astro';
     });
   </script>
 </Layout>
-
