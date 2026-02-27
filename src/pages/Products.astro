@@ -1,59 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const exampleProducts = [
-  {
-    id: "1",
-    title: "iPhone 13 Pro",
-    category: "Electrónica",
-    description: "Estado excelente, 128GB, incluye caja original y accesorios.",
-    image:
-      "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=800",
-    startPrice: 899,
-    minPrice: 599,
-    currentPrice: 735,
-    durationMinutes: 30,
-  },
-  {
-    id: "2",
-    title: "Zapatillas Nike Air",
-    category: "Moda",
-    description: "Talla 42, usadas muy poco, edición limitada.",
-    image:
-      "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800",
-    startPrice: 180,
-    minPrice: 95,
-    currentPrice: 132,
-    durationMinutes: 45,
-  },
-  {
-    id: "3",
-    title: 'Monitor 27" 144Hz',
-    category: "Gaming",
-    description: "Panel IPS 144Hz, perfecto para juegos competitivos.",
-    image:
-      "https://images.pexels.com/photos/5720568/pexels-photo-5720568.jpeg?auto=compress&cs=tinysrgb&w=800",
-    startPrice: 320,
-    minPrice: 210,
-    currentPrice: 256,
-    durationMinutes: 40,
-  },
-];
+import { products as exampleProducts } from "../data/products.js";
+import { calculateAuctionState } from "../utils/auction.js";
 ---
 
-<Layout title="Products - SecondHand">
-  <!-- Listado principal de productos (vista pública tipo marketplace) -->
-  <section class="py-20 bg-gray-900 text-white">
+<Layout title="Ofertas - ReMarket">
+  <section class="pt-28 pb-20 bg-gray-900 text-white">
     <div class="max-w-7xl mx-auto px-4">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">Productos destacados</h1>
       <p class="text-gray-300 mb-10 max-w-2xl">
-        Explora algunos productos actualmente en subasta y descubre cómo
-        funcionan los precios descendentes en el modelo de subasta holandesa.
+        Explora algunos productos con precios en bajada y descubre cómo funciona
+        el modelo de ReMarket.
       </p>
 
       <div class="space-y-6">
         <div class="flex items-center justify-between gap-4">
-          <h2 class="text-2xl font-semibold">Subastas activas</h2>
+          <h2 class="text-2xl font-semibold">Ofertas en curso</h2>
           <a
             href="/Account"
             class="text-sm font-medium"
@@ -66,15 +29,15 @@ const exampleProducts = [
         <div class="grid md:grid-cols-3 gap-6">
           {
             exampleProducts.map((p) => {
-              const progress =
-                p.startPrice === p.minPrice
-                  ? 100
-                  : ((p.startPrice - p.currentPrice) /
-                      (p.startPrice - p.minPrice)) *
-                    100;
+              const state = calculateAuctionState(p);
 
               return (
-                <article class="bg-gray-800 rounded-product p-5 border border-gray-700 hover:border-[var(--accent-color)] transition flex flex-col">
+                <article
+                  class="product-card bg-gray-800 rounded-product p-5 border border-gray-700 hover:border-[var(--accent-color)] transition flex flex-col"
+                  data-start={p.startPrice}
+                  data-min={p.minPrice}
+                  data-duration={p.durationMinutes}
+                >
                   <div class="mb-3 aspect-square rounded-product overflow-hidden bg-gray-700">
                     <img
                       src={p.image}
@@ -108,34 +71,36 @@ const exampleProducts = [
                       <dd class="font-semibold">{p.minPrice} €</dd>
                     </div>
                     <div class="flex justify-between">
-                      <dt class="text-gray-400">Duración</dt>
-                      <dd class="font-semibold">{p.durationMinutes} min</dd>
+                      <dt class="text-gray-400">Tiempo restante</dt>
+                      <dd class="font-semibold timer-text">
+                        {state.remainingMinutes} min
+                      </dd>
                     </div>
                     <div class="flex justify-between">
                       <dt class="text-gray-400">Precio actual</dt>
                       <dd
-                        class="font-semibold"
+                        class="font-semibold current-price-text"
                         style="color: var(--accent-color);"
                       >
-                        {p.currentPrice} €
+                        {state.currentPrice} €
                       </dd>
                     </div>
                   </dl>
 
-                  <div class="mb-4">
-                    <div class="flex justify-between text-[10px] text-gray-400 mb-1">
+                  <div class="mb-5">
+                    <div class="flex justify-between text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">
                       <span>Inicio</span>
                       <span>Actual</span>
                       <span>Mínimo</span>
                     </div>
-                    <div class="relative h-1.5 rounded-full bg-gray-700 overflow-hidden">
+                    <div class="relative h-2.5 rounded-full bg-gray-700">
                       <div
-                        class="absolute inset-y-0 left-0 rounded-r-full"
-                        style={`width: ${progress}%; background-color: var(--accent-color);`}
+                        class="progress-bar absolute inset-y-0 left-0 rounded-full"
+                        style={`width: ${state.progress}%; background-color: var(--accent-color);`}
                       />
                       <div
-                        class="absolute -top-1 w-3 h-3 rounded-full border border-gray-900"
-                        style={`left: calc(${progress}% - 6px); background-color: #f9fafb;`}
+                        class="progress-knob absolute -top-1 w-5 h-5 rounded-full border-2 border-gray-900 shadow-sm"
+                        style={`left: calc(${state.progress}% - 10px); background-color: #ffffff;`}
                       />
                     </div>
                   </div>
@@ -144,7 +109,7 @@ const exampleProducts = [
                     href={`/product/${p.id}`}
                     class="mt-auto w-full btn-accent py-2.5 rounded-product text-sm font-semibold flex justify-center items-center text-center"
                   >
-                    Ver detalle de la subasta
+                    Ver detalle del producto
                   </a>
                 </article>
               );
@@ -154,4 +119,50 @@ const exampleProducts = [
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    function updateAuctions() {
+      const cards = document.querySelectorAll(".product-card");
+      const now = new Date();
+
+      cards.forEach((card) => {
+        const startPrice = parseFloat(card.dataset.start);
+        const minPrice = parseFloat(card.dataset.min);
+        const duration = parseFloat(card.dataset.duration);
+
+        // Simulación determinista basada en el tiempo actual
+        const startTime = new Date(
+          now.getTime() -
+            (now.getMinutes() % duration) * 60000 -
+            now.getSeconds() * 1000,
+        );
+        const elapsedSeconds = (now.getTime() - startTime.getTime()) / 1000;
+        const totalSeconds = duration * 60;
+
+        const progress = Math.min(100, (elapsedSeconds / totalSeconds) * 100);
+        const remainingMinutes = Math.max(
+          0,
+          Math.ceil((totalSeconds - elapsedSeconds) / 60),
+        );
+        const currentPrice = Math.max(
+          minPrice,
+          Math.floor(startPrice - (startPrice - minPrice) * (progress / 100)),
+        );
+
+        // Actualizar DOM
+        const priceEl = card.querySelector(".current-price-text");
+        const timerEl = card.querySelector(".timer-text");
+        const barEl = card.querySelector(".progress-bar");
+        const knobEl = card.querySelector(".progress-knob");
+
+        if (priceEl) priceEl.textContent = `${currentPrice} €`;
+        if (timerEl) timerEl.textContent = `${remainingMinutes} min`;
+        if (barEl) barEl.style.width = `${progress}%`;
+        if (knobEl) knobEl.style.left = `calc(${progress}% - 10px)`;
+      });
+    }
+
+    // Actualizar cada segundo
+    setInterval(updateAuctions, 1000);
+  </script>
 </Layout>

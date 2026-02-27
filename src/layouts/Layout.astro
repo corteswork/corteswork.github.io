@@ -8,8 +8,10 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Plataforma de subastas holandesas" } =
-  Astro.props;
+const {
+  title,
+  description = "La plataforma de ReMarket con precios que bajan cada minuto.",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -19,7 +21,10 @@ const { title, description = "Plataforma de subastas holandesas" } =
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -65,18 +70,16 @@ const { title, description = "Plataforma de subastas holandesas" } =
       <div class="grid md:grid-cols-4 gap-8 mb-8">
         <div>
           <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
-            <span class="inline-flex items-center justify-center">
-              <lord-icon
-                src="https://cdn.lordicon.com/ggirntso.json"
-                trigger="hover"
-                colors="primary:#2de09f,secondary:#2de09f"
-                style="width:32px;height:32px"></lord-icon>
+            <span class="inline-flex items-center justify-center text-accent">
+              <i
+                class="fa-solid fa-store text-2xl"
+                style="color: var(--accent-color);"></i>
             </span>
-            SecondHand
+            ReMarket
           </h3>
           <p class="text-gray-400 text-sm">
-            La plataforma de subastas holandesas donde los precios bajan cada
-            segundo.
+            La plataforma de precios dinámicos donde los precios bajan cada
+            minuto. Encuentra las mejores gangas antes de que desaparezcan.
           </p>
         </div>
 
@@ -89,19 +92,22 @@ const { title, description = "Plataforma de subastas holandesas" } =
           </h4>
           <ul class="space-y-2 text-gray-400 text-sm">
             <li>
-              <a href="#" class="hover:text-green-400 transition"
-                >Explorar Subastas</a
+              <a href="/Products">Explorar ReMarket</a>
+            </li>
+            <li>
+              <a href="/Account" class="hover:text-green-400 transition"
+                >Mis Ofertas</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-green-400 transition">Mis Ofertas</a
+              <a href="/Account" class="hover:text-green-400 transition"
+                >Favoritos</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-green-400 transition">Favoritos</a>
-            </li>
-            <li>
-              <a href="#" class="hover:text-green-400 transition">Historial</a>
+              <a href="/Account" class="hover:text-green-400 transition"
+                >Historial</a
+              >
             </li>
           </ul>
         </div>
@@ -115,20 +121,20 @@ const { title, description = "Plataforma de subastas holandesas" } =
           </h4>
           <ul class="space-y-2 text-gray-400 text-sm">
             <li>
-              <a href="#" class="hover:text-green-400 transition"
-                >Crear Subasta</a
-              >
+              <a href="/UploadProduct">Vender Producto</a>
             </li>
             <li>
-              <a href="#" class="hover:text-green-400 transition"
+              <a href="/Account" class="hover:text-green-400 transition"
                 >Mis Productos</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-green-400 transition">Ventas</a>
+              <a href="/Account" class="hover:text-green-400 transition"
+                >Ventas</a
+              >
             </li>
             <li>
-              <a href="#" class="hover:text-green-400 transition"
+              <a href="/Account" class="hover:text-green-400 transition"
                 >Configuración</a
               >
             </li>
@@ -145,21 +151,24 @@ const { title, description = "Plataforma de subastas holandesas" } =
           </h4>
           <ul class="space-y-2 text-gray-400 text-sm">
             <li>
-              <a href="#" class="hover:text-green-400 transition"
+              <a href="/Help" class="hover:text-green-400 transition"
                 >Centro de Ayuda</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-green-400 transition">Contacto</a>
-            </li>
-            <li>
-              <a
-                href="/politica-privacidad"
-                class="hover:text-green-400 transition">Privacidad</a
+              <a href="/Contact" class="hover:text-green-400 transition"
+                >Contacto</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-green-400 transition">Términos</a>
+              <a href="/Privacy" class="hover:text-green-400 transition"
+                >Privacidad</a
+              >
+            </li>
+            <li>
+              <a href="/Terms" class="hover:text-green-400 transition"
+                >Términos</a
+              >
             </li>
           </ul>
         </div>
@@ -174,44 +183,28 @@ const { title, description = "Plataforma de subastas holandesas" } =
             class="text-gray-400 hover:text-green-400 transition"
             aria-label="Facebook"
           >
-            <lord-icon
-              src="https://cdn.lordicon.com/kthelypq.json"
-              trigger="hover"
-              colors="primary:#9ca3af,secondary:#2de09f"
-              style="width:30px;height:30px"></lord-icon>
+            <i class="fa-brands fa-facebook text-2xl"></i>
           </a>
           <a
             href="#"
             class="text-gray-400 hover:text-green-400 transition"
             aria-label="X"
           >
-            <lord-icon
-              src="https://cdn.lordicon.com/ulnswmkk.json"
-              trigger="hover"
-              colors="primary:#9ca3af,secondary:#2de09f"
-              style="width:30px;height:30px"></lord-icon>
+            <i class="fa-brands fa-x-twitter text-2xl"></i>
           </a>
           <a
             href="#"
             class="text-gray-400 hover:text-green-400 transition"
             aria-label="LinkedIn"
           >
-            <lord-icon
-              src="https://cdn.lordicon.com/oqdmuxru.json"
-              trigger="hover"
-              colors="primary:#9ca3af,secondary:#2de09f"
-              style="width:30px;height:30px"></lord-icon>
+            <i class="fa-brands fa-linkedin text-2xl"></i>
           </a>
           <a
             href="#"
             class="text-gray-400 hover:text-green-400 transition"
             aria-label="YouTube"
           >
-            <lord-icon
-              src="https://cdn.lordicon.com/abfverha.json"
-              trigger="hover"
-              colors="primary:#9ca3af,secondary:#2de09f"
-              style="width:30px;height:30px"></lord-icon>
+            <i class="fa-brands fa-youtube text-2xl"></i>
           </a>
         </div>
 
@@ -249,9 +242,9 @@ const { title, description = "Plataforma de subastas holandesas" } =
 
         <!-- Copyright -->
         <div class="text-center text-gray-500 text-sm">
-          <p>&copy; 2026 SecondHand. Todos los derechos reservados.</p>
+          <p>&copy; 2026 ReMarket. Todos los derechos reservados.</p>
           <p class="mt-2">
-            Plataforma de subastas holandesas con ofertas dinámicas
+            Plataforma ReMarket con ofertas dinámicas en tiempo real.
           </p>
         </div>
       </div>

@@ -70,13 +70,16 @@ h6 {
 }
 
 .btn-accent {
-  background-color: var(--accent-color);
-  color: #ffffff;
+  background-color: var(--accent-color) !important;
+  color: #000000 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color 150ms ease, filter 150ms ease, transform 150ms ease;
 }
 
 .btn-accent:hover {
-  filter: brightness(1.05);
+  filter: brightness(0.9);
 }
 
 .btn-accent-outline {

@@ -1,44 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { products as exampleProducts } from "../../data/products.js";
+import { calculateAuctionState } from "../../utils/auction.js";
 
 export function getStaticPaths() {
-    const exampleProducts = [
-        {
-            id: "1",
-            title: "iPhone 13 Pro",
-            category: "Electrónica",
-            description:
-                "Estado excelente, 128GB, incluye caja original y accesorios.",
-            image: "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=800",
-            startPrice: 899,
-            minPrice: 599,
-            currentPrice: 735,
-            durationMinutes: 30,
-        },
-        {
-            id: "2",
-            title: "Zapatillas Nike Air",
-            category: "Moda",
-            description: "Talla 42, usadas muy poco, edición limitada.",
-            image: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800",
-            startPrice: 180,
-            minPrice: 95,
-            currentPrice: 132,
-            durationMinutes: 45,
-        },
-        {
-            id: "3",
-            title: 'Monitor 27" 144Hz',
-            category: "Gaming",
-            description: "Panel IPS 144Hz, perfecto para juegos competitivos.",
-            image: "https://images.pexels.com/photos/5720568/pexels-photo-5720568.jpeg?auto=compress&cs=tinysrgb&w=800",
-            startPrice: 320,
-            minPrice: 210,
-            currentPrice: 256,
-            durationMinutes: 40,
-        },
-    ];
-
     return exampleProducts.map((p) => ({
         params: { id: p.id },
         props: { product: p },
@@ -46,18 +11,11 @@ export function getStaticPaths() {
 }
 
 const { product } = Astro.props;
-
-// Calculamos el progreso como en el listado
-const progress =
-    product.startPrice === product.minPrice
-        ? 100
-        : ((product.startPrice - product.currentPrice) /
-              (product.startPrice - product.minPrice)) *
-          100;
+const state = calculateAuctionState(product);
 ---
 
-<Layout title={`${product.title} - Detalles de Subasta`}>
-    <section class="py-24 bg-gray-900 text-white min-h-screen">
+<Layout title={`${product.title} - ReMarket Oferta`}>
+    <section class="pt-28 pb-20 bg-gray-900 text-white min-h-screen">
         <div class="max-w-7xl mx-auto px-4 mt-8 md:mt-12">
             <div class="mb-8">
                 <a
@@ -245,7 +203,11 @@ const progress =
                     </div>
 
                     <div
+                        id="auction-container"
                         class="bg-gray-800 rounded-product p-8 border border-gray-700 shadow-md relative overflow-hidden"
+                        data-start={product.startPrice}
+                        data-min={product.minPrice}
+                        data-duration={product.durationMinutes}
                     >
                         <!-- Glow effect -->
                         <div
@@ -258,13 +220,15 @@ const progress =
                             <div class="text-center">
                                 <span
                                     class="text-xs text-gray-500 uppercase tracking-[0.3em] font-black block mb-4"
-                                    >Puja Actual</span
+                                    >Precio Actual</span
                                 >
                                 <div class="relative inline-block">
                                     <span
                                         class="text-7xl font-black tracking-tighter text-white"
                                     >
-                                        {product.currentPrice}<span
+                                        <span id="current-price-val"
+                                            >{state.currentPrice}</span
+                                        ><span
                                             class="text-3xl ml-2 font-bold opacity-50"
                                             >€</span
                                         >
@@ -273,32 +237,40 @@ const progress =
                             </div>
 
                             <!-- Barra de progreso -->
-                            <div class="space-y-3">
+                            <div class="space-y-4">
                                 <div
-                                    class="flex justify-between text-[10px] text-gray-500 font-bold uppercase tracking-widest"
+                                    class="flex justify-between text-[11px] text-gray-400 font-bold uppercase tracking-widest"
                                 >
                                     <span>Salida: {product.startPrice}€</span>
                                     <span
                                         style="color: var(--accent-color);"
                                         class="animate-pulse"
-                                        >Quedan 12 min</span
+                                        id="auction-timer"
+                                        >Quedan {state.remainingMinutes} min</span
                                     >
                                     <span>Límite: {product.minPrice}€</span>
                                 </div>
                                 <div
-                                    class="relative h-2 rounded-full bg-gray-900 border border-gray-700 overflow-hidden"
+                                    class="relative h-3 rounded-full bg-gray-900 border border-gray-700 shadow-inner"
                                 >
                                     <div
-                                        class="absolute inset-y-0 left-0 rounded-r-full transition-all duration-1000 ease-in-out"
-                                        style={`width: ${progress}%; background-color: var(--accent-color);`}
+                                        id="auction-progress-bar"
+                                        class="absolute inset-y-0 left-0 rounded-full transition-all duration-1000 ease-in-out shadow-[0_0_15px_rgba(45,224,159,0.3)]"
+                                        style={`width: ${state.progress}%; background-color: var(--accent-color);`}
+                                    >
+                                    </div>
+                                    <div
+                                        id="auction-progress-knob"
+                                        class="absolute -top-1 w-5 h-5 rounded-full border-2 border-gray-900 shadow-lg bg-white"
+                                        style={`left: calc(${state.progress}% - 10px);`}
                                     >
                                     </div>
                                 </div>
                                 <p
-                                    class="text-[10px] text-gray-500 italic text-center"
+                                    class="text-[11px] text-gray-500 font-medium text-center italic"
                                 >
-                                    Subasta Holandesa: El precio baja cada
-                                    minuto.
+                                    El precio baja cada minuto. ¡Compra antes de
+                                    que desaparezca!
                                 </p>
                             </div>
 
@@ -327,9 +299,9 @@ const progress =
                                 <p
                                     class="text-center text-[11px] text-gray-500 font-medium px-4"
                                 >
-                                    Al confirmar la compra, aceptas los términos
-                                    de la subasta y te comprometes a pagar el
-                                    precio actual indicado.
+                                    Al confirmar la compra, aceptas las
+                                    condiciones de ReMarket y te comprometes a
+                                    pagar el precio actual indicado.
                                 </p>
                             </div>
                         </div>
@@ -619,6 +591,57 @@ const progress =
                     );
                 });
             });
+
+            function updateAuction() {
+                const container = document.getElementById("auction-container");
+                if (!container) return;
+
+                const startPrice = parseFloat(container.dataset.start);
+                const minPrice = parseFloat(container.dataset.min);
+                const duration = parseFloat(container.dataset.duration);
+                const now = new Date();
+
+                const startTime = new Date(
+                    now.getTime() -
+                        (now.getMinutes() % duration) * 60000 -
+                        now.getSeconds() * 1000,
+                );
+                const elapsedSeconds =
+                    (now.getTime() - startTime.getTime()) / 1000;
+                const totalSeconds = duration * 60;
+
+                const progress = Math.min(
+                    100,
+                    (elapsedSeconds / totalSeconds) * 100,
+                );
+                const remainingMinutes = Math.max(
+                    0,
+                    Math.ceil((totalSeconds - elapsedSeconds) / 60),
+                );
+                const currentPrice = Math.max(
+                    minPrice,
+                    Math.floor(
+                        startPrice - (startPrice - minPrice) * (progress / 100),
+                    ),
+                );
+
+                const priceEl = document.getElementById("current-price-val");
+                const timerEl = document.getElementById("auction-timer");
+                const barEl = document.getElementById("auction-progress-bar");
+                const knobEl = document.getElementById("auction-progress-knob");
+                const modalPriceEl = document.getElementById("total-price");
+
+                if (priceEl) priceEl.textContent = currentPrice;
+                if (timerEl)
+                    timerEl.textContent = `Quedan ${remainingMinutes} min`;
+                if (barEl) barEl.style.width = `${progress}%`;
+                if (knobEl) knobEl.style.left = `calc(${progress}% - 10px)`;
+                if (modalPriceEl)
+                    modalPriceEl.textContent = `${(currentPrice + 4.99).toFixed(2)}€`;
+            }
+
+            setInterval(updateAuction, 1000);
+            updateAuction();
         });
     </script>
 </Layout>

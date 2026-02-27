@@ -1,9 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { products } from "../data/products.js";
+import { calculateAuctionState } from "../utils/auction.js";
 ---
 
-<Layout title="Mi cuenta - SecondHand">
-  <section class="py-20 bg-gray-50">
+<Layout title="Mi cuenta - ReMarket">
+  <section class="pt-28 pb-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4">
       <div
         class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
@@ -20,7 +22,7 @@ import Layout from "../layouts/Layout.astro";
               Mi cuenta
             </h1>
             <p class="text-sm text-gray-500">
-              Gestiona tus productos, subastas y datos personales.
+              Gestiona tus productos y datos personales.
             </p>
           </div>
         </div>
@@ -29,11 +31,7 @@ import Layout from "../layouts/Layout.astro";
             href="/UploadProduct"
             class="btn-accent px-4 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2"
           >
-            <lord-icon
-              src="https://cdn.lordicon.com/zrkkrrpl.json"
-              trigger="hover"
-              colors="primary:#ffffff,secondary:#111827"
-              style="width:20px;height:20px"></lord-icon>
+            <i class="fa-solid fa-cloud-arrow-up"></i>
             <span>Subir producto</span>
           </a>
           <a
@@ -49,123 +47,94 @@ import Layout from "../layouts/Layout.astro";
         <section
           class="bg-white rounded-product shadow-sm border border-gray-200 p-6"
         >
-          <h2 class="text-xl font-semibold text-gray-900 mb-1">
-            Mis productos en subasta
-          </h2>
+          <h2 class="text-xl font-semibold text-gray-900 mb-1">Mis anuncios</h2>
           <p class="text-gray-500 text-sm mb-5">
             Consulta el estado de tus anuncios activos y revisa el rendimiento
-            de tus subastas holandesas.
+            de tus ofertas dinámicas.
           </p>
 
           <div class="border-t border-gray-100 pt-4 space-y-4">
-            <article class="flex gap-4">
-              <div
-                class="w-24 h-24 rounded-product overflow-hidden bg-gray-100 flex-shrink-0"
-              >
-                <img
-                  src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="iPhone 13 Pro"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <div class="flex-1">
-                <div class="flex items-start justify-between gap-3 mb-1">
-                  <div>
-                    <h3 class="text-sm font-semibold text-gray-900">
-                      iPhone 13 Pro 128GB
-                    </h3>
-                    <p class="text-xs text-gray-500">
-                      Electrónica · Hace 3 horas
-                    </p>
-                  </div>
-                  <span
-                    class="text-[11px] px-2 py-0.5 rounded-full"
-                    style="background-color: rgba(45, 224, 159, 0.12); color: var(--accent-color);"
-                  >
-                    Activa
-                  </span>
-                </div>
-                <div class="flex justify-between text-xs text-gray-600 mb-1.5">
-                  <span
-                    >Inicial: <span class="font-semibold text-gray-800"
-                      >899 €</span
-                    ></span
-                  >
-                  <span
-                    >Mínimo: <span class="font-semibold text-gray-800"
-                      >599 €</span
-                    ></span
-                  >
-                  <span>
-                    Actual:
-                    <span
-                      class="font-semibold"
-                      style="color: var(--accent-color);">735 €</span
-                    >
-                  </span>
-                </div>
-                <div
-                  class="flex justify-between items-center text-[11px] text-gray-500"
-                >
-                  <span>Duración: 30 min</span>
-                  <span>Quedan: 12 min</span>
-                  <span>Ofertas: 4</span>
-                </div>
-              </div>
-            </article>
+            {
+              products.map((p, index) => {
+                const state = calculateAuctionState(p);
+                const isActive = index === 0 && !state.isFinished;
 
-            <article class="flex gap-4">
-              <div
-                class="w-24 h-24 rounded-product overflow-hidden bg-gray-100 flex-shrink-0"
-              >
-                <img
-                  src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Zapatillas Nike Air"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <div class="flex-1">
-                <div class="flex items-start justify-between gap-3 mb-1">
-                  <div>
-                    <h3 class="text-sm font-semibold text-gray-900">
-                      Zapatillas Nike Air
-                    </h3>
-                    <p class="text-xs text-gray-500">Moda · Ayer</p>
-                  </div>
-                  <span
-                    class="text-[11px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-600"
+                return (
+                  <article
+                    class="account-product-card flex gap-4"
+                    data-start={p.startPrice}
+                    data-min={p.minPrice}
+                    data-duration={p.durationMinutes}
                   >
-                    Finalizada
-                  </span>
-                </div>
-                <div class="flex justify-between text-xs text-gray-600 mb-1.5">
-                  <span
-                    >Inicial: <span class="font-semibold text-gray-800"
-                      >180 €</span
-                    ></span
-                  >
-                  <span
-                    >Vendida por: <span class="font-semibold text-gray-800"
-                      >129 €</span
-                    ></span
-                  >
-                  <span
-                    >Ganador: <span class="font-semibold text-gray-800"
-                      >user_482</span
-                    ></span
-                  >
-                </div>
-                <div
-                  class="flex justify-between items-center text-[11px] text-gray-500"
-                >
-                  <span>Duración: 45 min</span>
-                  <span>Ofertas totales: 9</span>
-                  <span>Estado: Pagado</span>
-                </div>
-              </div>
-            </article>
+                    <div class="w-24 h-24 rounded-product overflow-hidden bg-gray-100 flex-shrink-0">
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="flex-1">
+                      <div class="flex items-start justify-between gap-3 mb-1">
+                        <div>
+                          <h3 class="text-sm font-semibold text-gray-900">
+                            {p.title}
+                          </h3>
+                          <p class="text-xs text-gray-500">
+                            {p.category} ·{" "}
+                            <span class="status-text">
+                              {isActive ? "Activa" : "Finalizada"}
+                            </span>
+                          </p>
+                        </div>
+                        <span
+                          class="status-badge text-[11px] px-2 py-0.5 rounded-full"
+                          style={
+                            isActive
+                              ? "background-color: rgba(45, 224, 159, 0.12); color: var(--accent-color);"
+                              : "background-color: #f3f4f6; color: #4b5563;"
+                          }
+                        >
+                          {isActive ? "Activa" : "Finalizada"}
+                        </span>
+                      </div>
+                      <div class="flex justify-between text-xs text-gray-600 mb-1.5">
+                        <span>
+                          Inicial:{" "}
+                          <span class="font-semibold text-gray-800">
+                            {p.startPrice} €
+                          </span>
+                        </span>
+                        <span>
+                          Mínimo:{" "}
+                          <span class="font-semibold text-gray-800">
+                            {p.minPrice} €
+                          </span>
+                        </span>
+                        <span>
+                          Actual:
+                          <span
+                            class="font-semibold current-price-text"
+                            style="color: var(--accent-color);"
+                          >
+                            {state.currentPrice} €
+                          </span>
+                        </span>
+                      </div>
+                      <div class="flex justify-between items-center text-[11px] text-gray-500">
+                        <span>Duración: {p.durationMinutes} min</span>
+                        <span class="timer-text">
+                          {isActive
+                            ? `Quedan: ${state.remainingMinutes} min`
+                            : "Vendida"}
+                        </span>
+                        <span>Ofertas: {index === 0 ? "4" : "9"}</span>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })
+            }
           </div>
         </section>
 
@@ -182,7 +151,7 @@ import Layout from "../layouts/Layout.astro";
                 <dd class="font-semibold">1</dd>
               </div>
               <div class="flex justify-between">
-                <dt>Subastas completadas</dt>
+                <dt>Ventas realizadas</dt>
                 <dd class="font-semibold">12</dd>
               </div>
               <div class="flex justify-between">
@@ -209,7 +178,7 @@ import Layout from "../layouts/Layout.astro";
                 href="/Products"
                 class="block w-full btn-accent-outline px-3 py-2 rounded-product text-center font-semibold"
               >
-                Ver subastas activas
+                Ver ofertas actuales
               </a>
             </div>
           </div>
@@ -217,4 +186,64 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    function updateAccountAuctions() {
+      const cards = document.querySelectorAll(".account-product-card");
+      const now = new Date();
+
+      cards.forEach((card, index) => {
+        const startPrice = parseFloat(card.dataset.start);
+        const minPrice = parseFloat(card.dataset.min);
+        const duration = parseFloat(card.dataset.duration);
+
+        const startTime = new Date(
+          now.getTime() -
+            (now.getMinutes() % duration) * 60000 -
+            now.getSeconds() * 1000,
+        );
+        const elapsedSeconds = (now.getTime() - startTime.getTime()) / 1000;
+        const totalSeconds = duration * 60;
+
+        const progress = Math.min(100, (elapsedSeconds / totalSeconds) * 100);
+        const remainingMinutes = Math.max(
+          0,
+          Math.ceil((totalSeconds - elapsedSeconds) / 60),
+        );
+        const currentPrice = Math.max(
+          minPrice,
+          Math.floor(startPrice - (startPrice - minPrice) * (progress / 100)),
+        );
+
+        const isFinished = remainingMinutes <= 0;
+        const isActive = index === 0 && !isFinished;
+
+        // Actualizar DOM
+        const priceEl = card.querySelector(".current-price-text");
+        const timerEl = card.querySelector(".timer-text");
+        const statusTextEl = card.querySelector(".status-text");
+        const statusBadgeEl = card.querySelector(".status-badge");
+
+        if (priceEl) priceEl.textContent = `${currentPrice} €`;
+        if (timerEl)
+          timerEl.textContent = isActive
+            ? `Quedan: ${remainingMinutes} min`
+            : "Vendida";
+        if (statusTextEl)
+          statusTextEl.textContent = isActive ? "Activa" : "Finalizada";
+        if (statusBadgeEl) {
+          statusBadgeEl.textContent = isActive ? "Activa" : "Finalizada";
+          if (isActive) {
+            statusBadgeEl.style.backgroundColor = "rgba(45, 224, 159, 0.12)";
+            statusBadgeEl.style.color = "var(--accent-color)";
+          } else {
+            statusBadgeEl.style.backgroundColor = "#f3f4f6";
+            statusBadgeEl.style.color = "#4b5563";
+          }
+        }
+      });
+    }
+
+    setInterval(updateAccountAuctions, 1000);
+  </script>
 </Layout>

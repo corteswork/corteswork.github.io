@@ -1,0 +1,97 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const faqs = [
+    {
+        question: "¿Qué es ReMarket?",
+        answer: "ReMarket es una plataforma de comercio electrónico única donde los precios bajan cada minuto. Puedes comprar un producto al precio actual o esperar a que baje, ¡pero cuidado! Alguien más podría comprarlo antes que tú.",
+    },
+    {
+        question: "¿Cómo funcionan los precios dinámicos?",
+        answer: "Cada producto tiene un precio inicial y un precio mínimo. El precio se reduce automáticamente cada minuto hasta que alguien lo compra o alcanza el precio mínimo establecido por el vendedor.",
+    },
+    {
+        question: "¿Cómo puedo vender mis productos?",
+        answer: "Para vender, simplemente haz clic en 'Vender Producto' en el menú principal. Deberás subir fotos, una descripción, el precio inicial y el precio mínimo al que estarías dispuesto a vender.",
+    },
+    {
+        question: "¿Es seguro comprar en ReMarket?",
+        answer: "Sí, utilizamos sistemas de pago seguros y protegemos tanto al comprador como al vendedor. El pago se retiene hasta que el comprador confirma la recepción del producto.",
+    },
+    {
+        question: "¿Qué pasa si un producto llega defectuoso?",
+        answer: "Contamos con una política de protección al comprador. Si el producto no coincide con la descripción o llega dañado, puedes abrir una disputa y nuestro equipo de soporte te ayudará a resolverlo.",
+    },
+];
+---
+
+<Layout title="Ayuda y FAQ - ReMarket">
+    <div class="pt-24 pb-20 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <div
+                    class="inline-flex items-center justify-center p-3 rounded-full bg-green-500/10 mb-4"
+                >
+                    <i
+                        class="fa-solid fa-circle-question text-4xl text-green-500"
+                    ></i>
+                </div>
+                <h1
+                    class="text-4xl font-black text-gray-900 mb-4 tracking-tight"
+                >
+                    Centro de Ayuda
+                </h1>
+                <p class="text-gray-600 text-lg">
+                    Encuentra respuestas a las preguntas más frecuentes sobre
+                    ReMarket.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                {
+                    faqs.map((faq, index) => (
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:border-green-500/20 transition-all">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-start gap-3">
+                                <span class="text-green-500 font-mono text-base">
+                                    0{index + 1}.
+                                </span>
+                                {faq.question}
+                            </h3>
+                            <p class="text-gray-600 leading-relaxed ml-9">
+                                {faq.answer}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <div
+                class="mt-16 bg-black rounded-lg p-8 text-center text-white relative overflow-hidden"
+            >
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-4">
+                        ¿No encuentras lo que buscas?
+                    </h2>
+                    <p class="text-gray-400 mb-8 max-w-md mx-auto">
+                        Nuestro equipo de soporte está disponible 24/7 para
+                        ayudarte con cualquier duda o problema.
+                    </p>
+                    <a
+                        href="mailto:soporte@remarket.com"
+                        class="btn-accent inline-flex items-center gap-2 font-bold px-8 py-4 rounded-lg transition-all transform hover:scale-105"
+                    >
+                        Contactar Soporte
+                        <i class="fa-solid fa-paper-plane text-xl text-black"
+                        ></i>
+                    </a>
+                </div>
+
+                <!-- Subtle decorative element -->
+                <div
+                    class="absolute -right-20 -bottom-20 w-64 h-64 bg-green-500/10 rounded-full blur-3xl"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
